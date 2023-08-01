@@ -1,6 +1,5 @@
 # MyCode-Java
 用于记录基于Java语言的数据结构与算法<br>
-测试mac提交代码
 
 ## 一、目录结构与说明
 core：工程通用bean与工具类；<br>
