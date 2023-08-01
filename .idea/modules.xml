@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/MyCode-Java.iml" filepath="$PROJECT_DIR$/.idea/MyCode-Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leetCode/leetCode.iml" filepath="$PROJECT_DIR$/leetCode/leetCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/liuyuboboAll/liuyuboboAll.iml" filepath="$PROJECT_DIR$/liuyuboboAll/liuyuboboAll.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nowCoder/nowCoder.iml" filepath="$PROJECT_DIR$/nowCoder/nowCoder.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="core" />
+        <module name="leetCode" />
+        <module name="liuyuboboAll" />
+        <module name="nowCoder" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="core" target="8" />
+      <module name="leetCode" target="8" />
+      <module name="liuyuboboAll" target="8" />
+      <module name="nowCoder" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
