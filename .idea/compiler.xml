@@ -10,13 +10,15 @@
         <module name="leetCode" />
         <module name="liuyuboboAll" />
         <module name="nowCoder" />
+        <module name="others" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="core" target="1.8" />
-      <module name="leetCode" target="1.8" />
-      <module name="liuyuboboAll" target="1.8" />
-      <module name="nowCoder" target="1.8" />
+      <module name="core" target="8" />
+      <module name="leetCode" target="8" />
+      <module name="liuyuboboAll" target="8" />
+      <module name="nowCoder" target="8" />
+      <module name="others" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

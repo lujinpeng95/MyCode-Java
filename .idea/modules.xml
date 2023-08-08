@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/leetCode/leetCode.iml" filepath="$PROJECT_DIR$/leetCode/leetCode.iml" />
       <module fileurl="file://$PROJECT_DIR$/liuyuboboAll/liuyuboboAll.iml" filepath="$PROJECT_DIR$/liuyuboboAll/liuyuboboAll.iml" />
       <module fileurl="file://$PROJECT_DIR$/nowCoder/nowCoder.iml" filepath="$PROJECT_DIR$/nowCoder/nowCoder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/others/others.iml" filepath="$PROJECT_DIR$/others/others.iml" />
     </modules>
   </component>
 </project>
