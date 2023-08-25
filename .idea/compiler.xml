@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -14,11 +15,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="core" target="8" />
-      <module name="leetCode" target="8" />
-      <module name="liuyuboboAll" target="8" />
-      <module name="nowCoder" target="8" />
-      <module name="others" target="8" />
+      <module name="core" target="1.8" />
+      <module name="leetCode" target="1.8" />
+      <module name="liuyuboboAll" target="1.8" />
+      <module name="MyCode-Java" target="1.8" />
+      <module name="nowCoder" target="1.8" />
+      <module name="others" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
