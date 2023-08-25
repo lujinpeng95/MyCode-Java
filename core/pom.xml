@@ -26,11 +26,13 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
+            <!--                高风险依赖-->
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
         </dependency>
         <dependency>
+            <!--                高风险依赖-->
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.10.1</version>
@@ -47,6 +49,7 @@
 
 <!--        引用自 dorich-framework -->
         <dependency>
+            <!--                高风险依赖-->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.1.18.RELEASE</version>
@@ -81,6 +84,7 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
         <dependency>
+            <!--                高风险依赖 -->
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.47</version>
@@ -128,6 +132,7 @@
             <version>30.1-jre</version>
         </dependency>
         <dependency>
+            <!--                高风险依赖-->
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.7.21</version>

@@ -135,6 +135,7 @@
 <!--                <version>1.0.12-SNAPSHOT</version>-->
 <!--            </dependency>-->
             <dependency>
+<!--                高风险依赖-->
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j2-jndi-safe.version}</version>
