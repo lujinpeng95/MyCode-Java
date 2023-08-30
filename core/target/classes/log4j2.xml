@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="ERROR" packages="com.baidu.miee.ilog.client.sdk.log4j2">
+    <Properties>
+        <Property name="baseDir">./log</Property>
+    </Properties>
+
+    <appenders>
+
+        <Console name="OfflineConsole" target="SYSTEM_OUT" follow="true">
+            <!--只接受程序中DEBUG级别的日志进行处理-->
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%t] %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </Console>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <!--只接受程序中DEBUG级别的日志进行处理-->
+            <ThresholdFilter level="OFF" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%t] %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </Console>
+        <Routing name="ConsoleRouter">
+            <Routes pattern="$${sys:spring.profiles.active:-online}">
+                <Route ref="OfflineConsole" key="dev" />
+                <Route ref="OfflineConsole" key="test" />
+                <Route ref="Console" key="online" />
+            </Routes>
+        </Routing>
+
+        <!--处理DEBUG级别的日志，并把该日志放到log/debug.log文件中-->
+        <!--打印出DEBUG级别日志，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <RollingFile name="RollingFileDebug" fileName="${baseDir}/debug.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/$${date:dd}/debug-%d{yyyy-MM-dd}-%i.log.gz" immediateFlush="false">
+            <Filters>
+                <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout
+                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] %t %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="${baseDir}/" maxDepth="3">
+                    <IfFileName glob="**/debug-*.log*"/>
+                    <IfLastModified age="15d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!--处理INFO级别的日志，并把该日志放到log/info.log文件中-->
+        <RollingFile name="RollingFileInfo" fileName="${baseDir}/info.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/$${date:dd}/info-%d{yyyy-MM-dd}-%i.log.gz" immediateFlush="false">
+            <Filters>
+                <!--只接受INFO级别的日志，其余的全部拒绝处理-->
+                <ThresholdFilter level="INFO"/>
+            </Filters>
+            <PatternLayout
+                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%t] %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="${baseDir}/" maxDepth="3">
+                    <IfFileName glob="**/info-*.log*"/>
+                    <IfLastModified age="15d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!--处理INFO级别的日志，并把该日志放到log/info2.log文件中-->
+        <RollingFile name="RollingFileInfo2" fileName="${baseDir}/info2.log"
+                     filePattern="${baseDir}/minos/info.log.%d{yyyyMMddHH}" immediateFlush="false">
+            <Filters>
+                <ThresholdFilter level="INFO"/>
+            </Filters>
+            <PatternLayout
+                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%t] %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="${baseDir}/minos/" maxDepth="3">
+                    <IfFileName glob="info.log.*"/>
+                    <IfLastModified age="15d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!--处理WARN级别的日志，并把该日志放到log/warn.log文件中-->
+        <RollingFile name="RollingFileWarn" fileName="${baseDir}/warn.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/$${date:dd}/warn-%d{yyyy-MM-dd}-%i.log.gz" immediateFlush="false">
+            <Filters>
+                <ThresholdFilter level="WARN"/>
+                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout
+                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%t] %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="${baseDir}/" maxDepth="3">
+                    <IfFileName glob="**/warn-*.log*"/>
+                    <IfLastModified age="15d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!--处理error级别的日志，并把该日志放到log/error.log文件中-->
+        <RollingFile name="RollingFileError" fileName="${baseDir}/error.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/$${date:dd}/error-%d{yyyy-MM-dd}-%i.log.gz" immediateFlush="false">
+            <ThresholdFilter level="ERROR"/>
+            <PatternLayout
+                    pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%t] %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="${baseDir}/" maxDepth="3">
+                    <IfFileName glob="**/error-*.log*"/>
+                    <IfLastModified age="15d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <LogClientAppender name="ilogClient">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+        </LogClientAppender>
+
+        <RollingFile name="blogFile" fileName="${baseDir}/sia.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/$${date:dd}/sia-%d{yyyy-MM-dd}-%i.log.gz" immediateFlush="false">
+            <PatternLayout pattern="%m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="200 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="${baseDir}/" maxDepth="3">
+                    <IfFileName glob="**/sia-*.log*"/>
+                    <IfLastModified age="30d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- tianlu.log -->
+        <RollingFile name="TianluRollingFile" fileName="${baseDir}/tianlu.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/$${date:dd}/tianlu-%d{yyyy-MM-dd}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%t] %-5level %class{36} %L %M [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %msg%xEx%n"/>
+            <Policies>
+                <!--rolling 文件大小，超过50MB触发一次rolling-->
+                <SizeBasedTriggeringPolicy size="50MB"/>
+                <!--rolling 根据filePattern按时间触发rolling, 每1小时进行一次rolling -->
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="${baseDir}/" maxDepth="3">
+                    <IfFileName glob="**/tianlu-*.log*"/>
+                    <IfLastModified age="7d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- rallog.log -->
+        <RollingFile name="RalLogRollingFile" fileName="${baseDir}/rallog.log"
+            filePattern="${baseDir}/$${date:yyyy-MM}/$${date:dd}/rallog-%d{yyyy-MM-dd}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%level: %d{yyyy-MM-dd HH:mm:ss z} [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %msg%xEx%n"/>
+            <Policies>
+                <!--rolling 文件大小，超过50MB触发一次rolling-->
+                <SizeBasedTriggeringPolicy size="50MB"/>
+                <!--rolling 根据filePattern按时间触发rolling, 每1小时进行一次rolling -->
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="${baseDir}/" maxDepth="2">
+                    <IfFileName glob="**/rallog-*.log*"/>
+                    <IfLastModified age="3d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- dependaspect.log -->
+        <RollingFile name="DependAspectRollingFile" fileName="${baseDir}/dependaspect.log"
+            filePattern="${baseDir}/$${date:yyyy-MM}/$${date:dd}/dependaspect-%d{yyyy-MM-dd}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%level: %d{yyyy-MM-dd HH:mm:ss z} [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %msg%xEx%n"/>
+            <Policies>
+                <!--rolling 文件大小，超过50MB触发一次rolling-->
+                <SizeBasedTriggeringPolicy size="50MB"/>
+                <!--rolling 根据filePattern按时间触发rolling, 每1小时进行一次rolling -->
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="${baseDir}/" maxDepth="2">
+                    <IfFileName glob="**/dependaspect-*.log*"/>
+                    <IfLastModified age="3d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+    </appenders>
+
+    <loggers>
+        <root level="INFO" includeLocation="true">
+            <appender-ref ref="ilogClient"/>
+            <appender-ref ref="ConsoleRouter"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileInfo2"/>
+            <appender-ref ref="RollingFileWarn"/>
+            <appender-ref ref="RollingFileError"/>
+            <appender-ref ref="RollingFileDebug"/>
+        </root>
+
+        <logger name="com.baidu.searchbox.blog.sdk.SiaLogger" level="INFO" additivity="false">
+            <appender-ref ref="blogFile"/>
+        </logger>
+        <!--log4j2 自带过滤日志-->
+        <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
+        <logger name="org.apache.catalina.util.LifecycleBase" level="ERROR"/>
+        <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
+        <logger name="org.apache.zookeeper" level="WARN">
+            <appender-ref ref="Console"/>
+        </logger>
+        <logger name="org.apache.sshd.common.util.SecurityUtils" level="WARN"/>
+        <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"/>
+        <logger name="org.crsh.plugin" level="WARN"/>
+        <logger name="org.crsh.ssh" level="WARN"/>
+        <logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="ERROR"/>
+        <logger name="org.hibernate.validator.internal.util.Version" level="WARN"/>
+        <logger name="org.springframework.boot.actuate.autoconfigure.CrshAutoConfiguration" level="WARN"/>
+        <logger name="org.springframework.boot.actuate.endpoint.jmx" level="WARN"/>
+        <logger name="org.thymeleaf" level="WARN"/>
+        <logger name="com.baidu.driver4j.bns.BNSQueryAgentProxy" level="ERROR" />
+        <logger name="com.baidubce.http.BceHttpClient" level="ERROR" />
+        <!--天路-->
+        <logger name="com.baidu.tianlu.sdk.service.DefaultConsumerService" level="TRACE" additivity="false">
+            <appender-ref ref="TianluRollingFile"/>
+        </logger>
+        <logger name="com.baidu.tianlu.sdk.api.ConsumerInstanceApiService" level="TRACE" additivity="false">
+            <appender-ref ref="TianluRollingFile"/>
+        </logger>
+        <!--ral-->
+        <logger name="com.baidu.mapp.ral.Ral" level="TRACE" additivity="true">
+            <appender-ref ref="RalLogRollingFile"/>
+        </logger>
+        <!--其他服务依赖-->
+        <logger name="com.baidu.mapp.dorich.framework.log.aspect.DependLogAspect" level="TRACE" additivity="true">
+            <appender-ref ref="DependAspectRollingFile"/>
+        </logger>
+    </loggers>
+</configuration>
