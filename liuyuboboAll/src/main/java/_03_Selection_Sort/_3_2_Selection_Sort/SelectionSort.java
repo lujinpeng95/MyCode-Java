@@ -12,9 +12,7 @@ import java.util.Arrays;
  */
 public final class SelectionSort {
 
-    private SelectionSort() {
-
-    }
+    private SelectionSort() {}
 
     public static void sort(int[] arr) {
 

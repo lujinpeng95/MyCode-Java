@@ -26,12 +26,17 @@ public final class SortingHelper {
 
     // 测量排序算法耗时
     public static <E extends Comparable<E>> void sortTest(Class<?> clazz, E[] arr) {
+        sortTest(clazz, "sort", arr);
+    }
+
+    // 测量指定排序方法的耗时
+    public static <E extends Comparable<E>> void sortTest(Class<?> clazz, String method, E[] arr) {
         Method sortMethod;
         // 秒
         double time = 0;
         try {
             // 反射获取排序方法【纯泛型入参 Java8 无法处理，此处的泛型都是实现了 Comparable 接口】
-            sortMethod = clazz.getMethod("sort", Comparable[].class);
+            sortMethod = clazz.getMethod(method, Comparable[].class);
             // 破坏封装
             sortMethod.setAccessible(true);
             // 泛型入参需要特殊处理
