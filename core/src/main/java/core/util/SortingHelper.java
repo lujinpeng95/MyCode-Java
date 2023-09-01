@@ -1,6 +1,5 @@
 package core.util;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
 /**
@@ -56,7 +55,7 @@ public final class SortingHelper {
             throw new RuntimeException(clazz.getName() + " failed");
         }
         // 使用千位分隔符格式化数字 n 的打印
-        System.out.println(String.format("%s , n = %,d : %f s", clazz.getSimpleName(), arr.length, time));
+        System.out.printf("%s , n = %,d : %f s%n", clazz.getSimpleName(), arr.length, time);
 
     }
 
