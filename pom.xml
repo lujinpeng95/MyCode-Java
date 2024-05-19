@@ -21,8 +21,8 @@
         <dorich-framework-version>version</dorich-framework-version>
         <java.version>1.8</java.version>
         <source.encoding>UTF-8</source.encoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,6 +42,7 @@
         <module>liuyuboboAll</module>
         <module>nowCoder</module>
         <module>others</module>
+        <module>wangzheng</module>
     </modules>
 
     <dependencyManagement>
