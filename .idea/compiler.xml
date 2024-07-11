@@ -10,8 +10,8 @@
         <module name="core" />
         <module name="leetCode" />
         <module name="liuyuboboAll" />
-        <module name="nowCoder" />
         <module name="others" />
+        <module name="nowCoder" />
         <module name="wangzheng" />
       </profile>
     </annotationProcessing>
