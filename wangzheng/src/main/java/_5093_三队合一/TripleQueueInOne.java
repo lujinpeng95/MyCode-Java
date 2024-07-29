@@ -1,5 +1,8 @@
 package _5093_三队合一;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 题目描述：用一个数组，存储三个队列（大小一致），并且每个队列都能实现正常的队列操作。所有的队列操作需要传递queueID指名用的是三个队列中的哪一个（从0开始）
  * 
