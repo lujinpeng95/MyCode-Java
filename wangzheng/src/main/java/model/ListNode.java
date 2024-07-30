@@ -27,6 +27,10 @@ public class ListNode<E> {
         return val.toString();
     }
 
+    public void print() {
+        System.out.print(this.val + " ");
+    }
+
     // 返回node及其之后链表数据
     public String getAll() {
         StringBuilder res = new StringBuilder();
