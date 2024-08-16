@@ -15,8 +15,7 @@ public final class ArrayUtil {
     }
 
     public static void swap(int[] arr, int i, int j) {
-        if (Objects.isNull(arr) || arr.length == 0 || i > arr.length - 1 || j > arr.length - 1 ||
-                i == j) {
+        if (Objects.isNull(arr) || i < 0 || j < 0 || i > arr.length - 1 || j > arr.length - 1 || i == j) {
             return;
         }
 
@@ -27,8 +26,7 @@ public final class ArrayUtil {
 
     // hutool提供了类似方法
     public static <E> void swap(E[] arr, int i, int j) {
-        if (Objects.isNull(arr) || arr.length == 0 || i > arr.length - 1 || j > arr.length - 1 ||
-                i == j) {
+        if (Objects.isNull(arr) || i < 0 || j < 0 || i > arr.length - 1 || j > arr.length - 1 || i == j) {
             return;
         }
 
